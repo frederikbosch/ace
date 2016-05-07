@@ -34,6 +34,21 @@
     }
 }
 
+// IRecieveCollectionChanges.add
+- (void) add:(NSObject*)collection item:(NSObject*)item {
+    //assert collection == _children;
+    [self addSubview:(UIView*)item];
+    [UIViewHelper resize:self];
+}
+
+// IRecieveCollectionChanges.removeAt
+- (void) removeAt:(NSObject*)collection index:(int)index {
+    //assert collection == _children;
+    UIView* view = [self subviews][index];
+    [view removeFromSuperview];
+    [UIViewHelper resize:self];
+}
+
 + (void)showNavigationBar:(CommandBar*)bar on:(UIViewController*)viewController animated:(BOOL)animated {
     [Frame ShowNavigationBar];
 
