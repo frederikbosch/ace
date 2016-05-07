@@ -6,7 +6,7 @@
 #import "IRecieveCollectionChanges.h"
 #import "CommandBarElementCollection.h"
 
-@interface CommandBar : NSObject <IHaveProperties, IRecieveCollectionChanges>
+@interface CommandBar : NSObject <IHaveProperties>
 {
     CommandBarElementCollection* _primaryCommands;
     CommandBarElementCollection* _secondaryCommands;
