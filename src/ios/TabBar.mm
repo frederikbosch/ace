@@ -38,13 +38,16 @@
 // IRecieveCollectionChanges.add
 - (void) add:(NSObject*)collection item:(NSObject*)item {
     //assert collection == items;
-    // TODO: Update items
+    [self addSubview:(UIView*)item];
+    [UIViewHelper resize:self];
 }
 
 // IRecieveCollectionChanges.removeAt
 - (void) removeAt:(NSObject*)collection index:(int)index {
     //assert collection == items;
-    // TODO: Update items
+    UIView* view = [self subviews][index];
+    [view removeFromSuperview];
+    [UIViewHelper resize:self];
 }
 
 - (void)tabBar:(UITabBar*)tabBar didSelectItem:(UITabBarItem*)item {
