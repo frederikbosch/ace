@@ -97,9 +97,6 @@ public class TabBar extends android.widget.LinearLayout implements
                             tab.setTabListener(this);
                             mainActionBar.addTab(tab, i == 0);
                         }
-
-                        tab.setTabListener(this);
-                        mainActionBar.addTab(tab, i == 0);
                     }
                 }
                 return;
@@ -191,6 +188,11 @@ public class TabBar extends android.widget.LinearLayout implements
             }
             Bitmap bitmap = Utils.getBitmapAsset(themedContext, abb.icon.toString());
             iv.setImageDrawable(new android.graphics.drawable.BitmapDrawable(bitmap));
+
+            if (overwriteTintColor) {
+                iv.setColorFilter(tintColor);
+            }
+
             ll.addView(iv);
         }
 
