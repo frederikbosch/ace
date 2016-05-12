@@ -9,10 +9,13 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AbsoluteLayout;
 import java.util.Stack;
 import run.ace.AceActivity;
+import run.ace.NativeHost;
 
 public class Frame extends AbsoluteLayout implements IHaveProperties, Application.ActivityLifecycleCallbacks {
     static Stack<Activity> _activities = new Stack<Activity>();
@@ -77,5 +80,27 @@ public class Frame extends AbsoluteLayout implements IHaveProperties, Applicatio
 		if (!ViewGroupHelper.setProperty(this, propertyName, propertyValue)) {
 			throw new RuntimeException("Unhandled property for " + this.getClass().getSimpleName() + ": " + propertyName);
 		}
+	}
+
+	public static void ShowNavigationBar () {
+        final android.app.ActionBar actionBar = NativeHost.getMainActivity().getActionBar();
+        if (actionBar != null) {
+            actionBar.show();
+        }
+	}
+
+	public static void HideNavigationBar () {
+        final android.app.ActionBar actionBar = NativeHost.getMainActivity().getActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
+	}
+
+	public static void ShowTabBar () {
+
+	}
+
+	public static void HideTabBar () {
+
 	}
 }

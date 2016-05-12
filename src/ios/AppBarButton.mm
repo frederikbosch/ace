@@ -34,6 +34,9 @@
         else
             [self setIcon:(IconElement*)propertyValue];
     }
+    else if ([propertyName hasSuffix:@".Badge"]) {
+        _Badge = (NSString*)propertyValue;
+    }
     else {
         [super setProperty:propertyName value:propertyValue];
     }

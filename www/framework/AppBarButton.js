@@ -19,4 +19,7 @@ AppBarButton.prototype.setIcon = function (icon) { this.set("AppBarButton.Icon",
 AppBarButton.prototype.getLabel = function () { return this.get("AppBarButton.Label"); };
 AppBarButton.prototype.setLabel = function (label) { this.set("AppBarButton.Label", label); };
 
+AppBarButton.prototype.getBadge = function () { return this.get("AppBarButton.Badge"); };
+AppBarButton.prototype.setBadge = function (badge) { this.set("AppBarButton.Badge", badge); };
+
 module.exports = AppBarButton;

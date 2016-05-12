@@ -7,6 +7,7 @@
 #import "Page.h"
 #import "CommandBar.h"
 #import "Frame.h"
+#import "TabBar.h"
 
 @implementation AceViewController
 
@@ -82,7 +83,19 @@
         Page* p = (Page*)self.view.subviews[0];
 
         // Show or hide the toolbar based on the presence of a Page's BottomAppBar
-        [CommandBar showTabBar:[p getBottomAppBar] on:self animated:animated];
+        NSObject* tb = [p getBottomAppBar];
+        if (tb == nil) {
+            UITabBar* tb = [self.view.layer valueForKey:@"Ace.TabBar"];
+            if (tb != nil) {
+                [tb removeFromSuperview];
+            }
+        }
+        else if ([tb isKindOfClass:[TabBar class]]) {
+            [(TabBar*)tb showTabBar:self animated:animated];
+        }
+        else {
+            [(CommandBar*)tb showTabBar:self animated:animated];
+        }
 
         // Show or hide the navigation bar based on the presence of a Page's TopAppBar
         // (TODO still need to force show if there's a title)

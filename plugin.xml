@@ -342,6 +342,8 @@
     <source-file src="src/ios/NativeEventAttacher.mm" />
     <header-file src="src/ios/NativeHost.h" />
     <source-file src="src/ios/NativeHost.mm" />
+    <header-file src="src/ios/NavigationList.h" />
+    <source-file src="src/ios/NavigationList.mm" />
     <header-file src="src/ios/ObservableCollection.h" />
     <source-file src="src/ios/ObservableCollection.mm" />
     <header-file src="src/ios/OutgoingMessages.h" />
@@ -420,6 +422,8 @@
     <source-file src="src/ios/UILabelHelper.mm" />
     <header-file src="src/ios/UIViewHelper.h" />
     <source-file src="src/ios/UIViewHelper.mm" />
+    <header-file src="src/ios/UITabBarItemWithBadge.h" />
+    <source-file src="src/ios/UITabBarItemWithBadge.mm" />
     <header-file src="src/ios/Utils.h" />
     <source-file src="src/ios/Utils.mm" />
     <header-file src="src/ios/WebView.h" />

@@ -10,6 +10,7 @@
 #import "Page.h"
 #import "Frame.h"
 #import "CommandBar.h"
+#import "TabBar.h"
 #import "RectUtils.h"
 
 @implementation UIViewHelper
@@ -112,16 +113,6 @@
       }
       // Leave Padding unhandled on all other view types
     }
-    else if ([propertyName hasSuffix:@".BottomAppBar"]) {
-        // This is valid when treating the default root view as a Page
-        [CommandBar showTabBar:propertyValue on:[Frame getNavigationController].topViewController animated:false];
-        return true;
-    }
-    else if ([propertyName hasSuffix:@".TopAppBar"]) {
-        // This is valid when treating the default root view as a Page
-        [CommandBar showNavigationBar:(CommandBar*)propertyValue on:[Frame getNavigationController].topViewController animated:false];
-        return true;
-    }
     else if ([propertyName hasSuffix:@".Resources"] || [propertyName hasSuffix:@".Style"]) {
         // Accept this, but don't actually do anything with the object.
         // Resources and styles are handled on the managed side.
@@ -193,8 +184,19 @@
                 if ([p getTopAppBar] != nil) {
                     [CommandBar showNavigationBar:[p getTopAppBar] on:viewController animated:false];
                 }
-                //TODO: Hide navbar if no title and no topappbar
-                [CommandBar showTabBar:[p getBottomAppBar] on:viewController animated:false];
+                NSObject* tb = [p getBottomAppBar];
+                if (tb == nil) {
+                    UITabBar* tb = [viewController.view.layer valueForKey:@"Ace.TabBar"];
+                    if (tb != nil) {
+                        [tb removeFromSuperview];
+                    }
+                }
+                else if ([tb isKindOfClass:[TabBar class]]) {
+                    [(TabBar*)tb showTabBar:viewController animated:false];
+                }
+                else {
+                    [(CommandBar*)tb showTabBar:viewController animated:false];
+                }
             }
             else {
                 navigationController.navigationBarHidden = true;

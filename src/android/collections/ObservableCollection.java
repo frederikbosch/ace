@@ -56,7 +56,16 @@ public class ObservableCollection extends ArrayList {
 	}
 
 	public void Clear() {
+		int itemSize = super.size();
 		super.clear();
-        //TODO: Need to notify listeners!
+
+        if (_listeners != null) {
+			// Notify any listeners
+			for (int i = 0; i < _listeners.size(); i++) {
+				for (int k = 0; k < itemSize; k++) {
+					_listeners.get(i).removeAt(this, k);
+				}
+			}
+		}
 	}
 }

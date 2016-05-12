@@ -21,7 +21,7 @@
 - (void) setProperty:(NSString*)propertyName value:(NSObject*)propertyValue {
     if ([propertyName hasSuffix:@".BottomAppBar"]) {
         // TODO: Need to handle invalidations inside buttons, etc.
-        _bottomAppBar = propertyValue;
+        _bottomAppBar = (NSObject*)propertyValue;
         // TODO: Only do this if the page is already attached
         // [CommandBar showTabBar:_bottomAppBar on:[Frame getNavigationController].topViewController animated:false];
     }

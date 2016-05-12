@@ -6,6 +6,7 @@
 #import "AceNavigationController.h"
 #import "AceViewController.h"
 #import "Page.h"
+#import "TabBar.h"
 
 @implementation Frame
 
@@ -63,12 +64,28 @@ UINavigationController* _navigationController;
 
 + (void)ShowNavigationBar {
     UINavigationController* navigationController = [Frame getNavigationController];
-    navigationController.navigationBarHidden = false;
+    [navigationController setNavigationBarHidden:false animated:true];
 }
 
 + (void)HideNavigationBar {
     UINavigationController* navigationController = [Frame getNavigationController];
-    navigationController.navigationBarHidden = true;
+    [navigationController setNavigationBarHidden:true animated:true];
+}
+
++ (void)ShowTabBar {
+    UINavigationController* navigationController = [Frame getNavigationController];
+    UITabBar* tb = [navigationController.topViewController.view.layer valueForKey:@"Ace.TabBar"];
+    if (tb != nil) {
+        [navigationController.topViewController.view addSubview:tb];
+    }
+}
+
++ (void)HideTabBar {
+    UINavigationController* navigationController = [Frame getNavigationController];
+    UITabBar* tb = [navigationController.topViewController.view.layer valueForKey:@"Ace.TabBar"];
+    if (tb != nil) {
+        [tb removeFromSuperview];
+    }
 }
 
 @end

@@ -7,11 +7,13 @@
 
 @interface AppBarButton : Button
 {
+    NSString* _Badge;
     IconElement* _Icon;
     UIBarButtonItem* _ToolbarItem;
 }
 
 @property NSString* Label;
+@property NSString* Badge;
 @property IconElement* Icon;
 @property UIBarButtonItem* ToolbarItem;
 

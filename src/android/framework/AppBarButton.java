@@ -11,6 +11,7 @@ import run.ace.*;
 
 public class AppBarButton extends Button {
     public String label;
+    public String badge;
     public Object icon;
 
 	public AppBarButton(Context context) {
@@ -25,6 +26,9 @@ public class AppBarButton extends Button {
         }
         else if (propertyName.endsWith(".Icon")) {
            this.icon = propertyValue;
+        }
+        else if (propertyName.endsWith(".Badge")) {
+           this.badge = (String)propertyValue;
         }
         else {
             super.setProperty(propertyName, propertyValue);

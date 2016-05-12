@@ -9,7 +9,7 @@
 function ObservableCollection(nativeTypeName) {
     this._items = [];
     this.handle = ace.ToNative.queueCreateMessage(this, nativeTypeName);
-};
+}
 
 // Inheritance
 ObservableCollection.prototype = Object.create(ace.NativeObject.prototype);

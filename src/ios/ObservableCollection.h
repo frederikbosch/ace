@@ -17,10 +17,7 @@
 
 - (void)Add:(id)obj;
 - (void)Clear;
-- (void)Remove:(id)obj;
 - (void)RemoveAt:(int)index;
-- (void)Insert:(int)index object:(id)obj;
-- (void)Set:(int)index object:(id)obj;
 
 // For indexing:
 - (id)objectAtIndexedSubscript:(NSUInteger)index;

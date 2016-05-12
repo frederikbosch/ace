@@ -13,8 +13,8 @@
 
 - (CommandBarElementCollection*) getPrimaryCommands;
 - (CommandBarElementCollection*) getSecondaryCommands;
+- (void)showTabBar:(UIViewController*)viewController animated:(BOOL)animated;
 
 + (void)showNavigationBar:(CommandBar*)bar on:(UIViewController*)viewController animated:(BOOL)animated;
-+ (void)showTabBar:(NSObject*)bar on:(UIViewController*)viewController animated:(BOOL)animated;
 
 @end

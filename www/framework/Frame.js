@@ -25,6 +25,14 @@ Frame.showNavigationBar = function () {
     ace.NativeObject.invoke("Windows.UI.Xaml.Controls.Frame", "ShowNavigationBar");
 };
 
+Frame.hideTabBar = function () {
+    ace.NativeObject.invoke("Windows.UI.Xaml.Controls.Frame", "HideTabBar");
+};
+
+Frame.showTabBar = function () {
+    ace.NativeObject.invoke("Windows.UI.Xaml.Controls.Frame", "ShowTabBar");
+};
+
 Frame.getTitle = function (page) { return page.get("Frame.Title"); };
 Frame.setTitle = function (page, title) { page.set("Frame.Title", title); };
 

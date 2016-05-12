@@ -46,20 +46,17 @@
 }
 
 - (void)Clear {
+    int itemCount = _array.count;
+
     [_array removeAllObjects];
     if (_listeners != nil) {
         // Notify any listeners
         for (int i = 0; i < _listeners.count; i++) {
-            for (int j = 0; j < _array.count; j++) {
+            for (int j = 0; j < itemCount; j++) {
                 [_listeners[i] removeAt:self index:j];
             }
         }
     }
-}
-
-- (void)Remove:(id)obj {
-    [_array removeObject:obj];
-    // TODO: Need to notify listeners!
 }
 
 - (void)RemoveAt:(int)index {
@@ -70,16 +67,6 @@
             [_listeners[i] removeAt:self index:index];
         }
     }
-}
-
-- (void)Insert:(int)index object:(id)obj {
-    [_array insertObject:obj atIndex:index];
-    // TODO: Need to notify listeners!
-}
-
-- (void)Set:(int)index object:(id)obj {
-    [_array setObject:obj atIndexedSubscript:index];
-    // TODO: Need to notify listeners!
 }
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index {

@@ -4,14 +4,18 @@
 //-------------------------------------------------------------------------------------------------------
 package run.ace;
 
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AbsoluteLayout;
 import Windows.UI.Xaml.Controls.Frame;
 import Windows.UI.Xaml.Controls.Page;
+import run.ace.NativeHost;
 
 // The activity used when navigating to a new native frame.
 public class AceActivity extends android.app.Activity {

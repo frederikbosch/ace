@@ -2,17 +2,18 @@
 // Copyright (C) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
 //-------------------------------------------------------------------------------------------------------
-#import "IHaveProperties.h"
-#import "IRecieveCollectionChanges.h"
 #import "CommandBarElementCollection.h"
+#import "IRecieveCollectionChanges.h"
 
-@interface TabBar : NSObject <UITabBarDelegate, IHaveProperties, IRecieveCollectionChanges>
+@interface NavigationList : NSObject  <IRecieveCollectionChanges>
 {
-    int selectedIndex;
-    UITabBar* _tabBar;
-    UINavigationController* _controller;
-	CommandBarElementCollection* items;
+    CommandBarElementCollection* items;
+    UINavigationItem* navigationItem;
+    BOOL left;
+    BOOL listeners;
 }
 
-- (void)showTabBar:(UIViewController*)viewController animated:(BOOL)animated;
+- (id)init:(CommandBarElementCollection*)items_ on:(UINavigationItem*)navigationItem_ left:(BOOL)left_;
+- (void)show;
+
 @end
