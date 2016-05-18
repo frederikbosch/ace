@@ -9,6 +9,8 @@
 
     [self setBadgeValue:value];
 
+    NSLog(@"DEBUG: got here 2");
+
     for(UIView *sv in v.subviews) {
         NSString *str = NSStringFromClass([sv class]);
         NSLog(str);
