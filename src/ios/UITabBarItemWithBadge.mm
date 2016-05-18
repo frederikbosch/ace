@@ -11,6 +11,7 @@
 
     for(UIView *sv in v.subviews) {
         NSString *str = NSStringFromClass([sv class]);
+        NSLog(str);
         if([str isEqualToString:@"_UIBadgeView"]) {
             for(UIView *ssv in sv.subviews) {
                 if(ssv.tag == 27) {
