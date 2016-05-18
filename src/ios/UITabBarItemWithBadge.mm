@@ -10,10 +10,13 @@
     [self setBadgeValue:value];
 
     NSLog(@"DEBUG: got here 2");
+    NSLog(NSStringFromClass([v class]));
+    NSLog(@"Subviews:%d", [v.subviews count]);
 
     for(UIView *sv in v.subviews) {
         NSString *str = NSStringFromClass([sv class]);
         NSLog(str);
+
         if([str isEqualToString:@"_UIBadgeView"]) {
             for(UIView *ssv in sv.subviews) {
                 if(ssv.tag == 27) {
