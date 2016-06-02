@@ -363,8 +363,8 @@ public class TabBar extends android.widget.LinearLayout implements
  	}
 
 	public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
-        //int index = tab.getPosition();
-        //OutgoingMessages.raiseEvent("click", _primaryCommands.get(index), null);
+        int index = tab.getPosition();
+        OutgoingMessages.raiseEvent("click", _primaryCommands.get(index), null);
  	}
 
 /*
