@@ -422,8 +422,6 @@
     <source-file src="src/ios/UILabelHelper.mm" />
     <header-file src="src/ios/UIViewHelper.h" />
     <source-file src="src/ios/UIViewHelper.mm" />
-    <header-file src="src/ios/UITabBarItemWithBadge.h" />
-    <source-file src="src/ios/UITabBarItemWithBadge.mm" />
     <header-file src="src/ios/Utils.h" />
     <source-file src="src/ios/Utils.mm" />
     <header-file src="src/ios/WebView.h" />

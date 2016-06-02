@@ -10,7 +10,6 @@
 #import "TabBar.h"
 #import "Utils.h"
 #import "UIViewHelper.h"
-#import "UITabBarItemWithBadge.h"
 
 @implementation TabBar
 
@@ -65,12 +64,12 @@
         [_controller viewWillLayoutSubviews];
 
         if (selectedIndex != -1 && [_tabBar.items count] > selectedIndex && [_tabBar.items objectAtIndex:selectedIndex] != nil) {
-            _tabBar.selectedItem = (UITabBarItemWithBadge*)_tabBar.items[selectedIndex];
+            _tabBar.selectedItem = (UITabBarItem*)_tabBar.items[selectedIndex];
         }
     }
 }
 
-- (void)tabBar:(UITabBar*)tabBar didSelectItem:(UITabBarItemWithBadge*)item {
+- (void)tabBar:(UITabBar*)tabBar didSelectItem:(UITabBarItem*)item {
     selectedIndex = item.tag;
     [OutgoingMessages raiseEvent:@"click" instance:items[selectedIndex] eventData:nil];
 }
@@ -89,7 +88,7 @@
     if (_tabBar.items.count > 0) {
         // Automatically select the first tab, which happens automatically on Android
         selectedIndex = 0;
-        _tabBar.selectedItem = (UITabBarItemWithBadge*)_tabBar.items[0];
+        _tabBar.selectedItem = (UITabBarItem*)_tabBar.items[0];
         [OutgoingMessages raiseEvent:@"click" instance:items[0] eventData:nil];
     }
 
@@ -106,16 +105,16 @@
 
         for (unsigned long i = 0; i < itemsCount; i++) {
             id command = items[i];
-            UITabBarItemWithBadge* tab = nil;
+            UITabBarItem* tab = nil;
 
             if ([command isKindOfClass:[AppBarButton class]]) {
                 AppBarButton* abb = (AppBarButton*)command;
                 if (true) { //TODO: if visible
                     if ([abb.Icon isKindOfClass:[SymbolIcon class]] || abb.Icon == nil) {
                         if (abb.hasSystemIcon)
-                            tab = [[UITabBarItemWithBadge alloc] initWithTabBarSystemItem:abb.systemIcon tag:i];
+                            tab = [[UITabBarItem alloc] initWithTabBarSystemItem:abb.systemIcon tag:i];
                         else
-                            tab = [[UITabBarItemWithBadge alloc] initWithTitle:abb.Label image:nil tag:i];
+                            tab = [[UITabBarItem alloc] initWithTitle:abb.Label image:nil tag:i];
                     }
                     else if ([abb.Icon isKindOfClass:[BitmapIcon class]]) {
                         NSString* source = ((BitmapIcon*)abb.Icon).UriSource;
@@ -126,18 +125,18 @@
                         if (offImage == nil) {
                             offImage = [Utils getImage:source];
                         }
-                        tab = [[UITabBarItemWithBadge alloc] initWithTitle:abb.Label image:offImage tag:i];
+                        tab = [[UITabBarItem alloc] initWithTitle:abb.Label image:offImage tag:i];
                         tab.selectedImage = onImage;
                     }
                     else if (abb.Icon == nil) {
-                        tab = [[UITabBarItemWithBadge alloc] initWithTitle:abb.Label image:nil tag:i];
+                        tab = [[UITabBarItem alloc] initWithTitle:abb.Label image:nil tag:i];
                     }
                     else {
                         throw @"Unhandled AppBarButton icon type";
                     }
 
                     if (abb.Badge != nil) {
-                        [tab setCustomBadgeValue:abb.Badge fontColor:[UIColor whiteColor] backgroundColor:_tabBar.tintColor];
+                        [tab setBadgeValue:abb.Badge];
                     }
                 }
             }
