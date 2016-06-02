@@ -60,8 +60,6 @@
     if (_controller != nil) {
         [self displayTabs:false];
         [_controller viewWillLayoutSubviews];
-        [self displayBadges];
-        [_controller viewWillLayoutSubviews];
 
         if (selectedIndex != -1 && [_tabBar.items count] > selectedIndex && [_tabBar.items objectAtIndex:selectedIndex] != nil) {
             _tabBar.selectedItem = (UITabBarItem*)_tabBar.items[selectedIndex];
@@ -83,7 +81,6 @@
     // display tabs and badges
     [self displayTabs:animated];
     [viewController.navigationController viewWillLayoutSubviews];
-    [self displayBadges];
 
     if (_tabBar.items.count > 0) {
         // Automatically select the first tab, which happens automatically on Android
@@ -150,18 +147,6 @@
         }
 
         [_tabBar setItems:tabs animated:animated];
-    }
-}
-
-- (void) displayBadges {
-    if (items != nil) {
-        unsigned long itemsCount = items.Count;
-        for (unsigned long i = 0; i < itemsCount; i++) {
-            id command = items[i];
-            AppBarButton* abb = (AppBarButton*)command;
-
-
-        }
     }
 }
 
