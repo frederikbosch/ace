@@ -281,12 +281,12 @@ public class TabBar extends android.widget.LinearLayout implements
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
             );
             badgeContainer.setLayoutParams(bcp);
-            bcp.gravity = Gravity.CENTER_HORIZONTAL;
+            badgeContainer.setGravity(Gravity.RIGHT);
 
             ShapeDrawable badgeDrawable = new ShapeDrawable(new OvalShape());
-            badgeDrawable.setIntrinsicHeight( 60 );
-            badgeDrawable.setIntrinsicWidth( 60);
-            badgeDrawable.setBounds(new Rect(0, 0, 60, 60));
+            badgeDrawable.setIntrinsicHeight( 45 );
+            badgeDrawable.setIntrinsicWidth( 45);
+            badgeDrawable.setBounds(new Rect(0, 0, 45, 45));
             if (overwriteTintColor) {
                 badgeDrawable.getPaint().setColor(tintColor);
             } else {
@@ -297,7 +297,7 @@ public class TabBar extends android.widget.LinearLayout implements
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            blp.setMargins(30, 0, 0, 0);
+            blp.setMargins(0, 5, 30, 0);
 
             TextView badgeView = new TextView(themedContext);
             badgeView.setLayoutParams(blp);
@@ -309,7 +309,6 @@ public class TabBar extends android.widget.LinearLayout implements
             } else {
                 badgeView.setTextColor(Color.BLACK);
             }
-            badgeView.setPadding(15, 0, 15, 0);
             badgeView.setBackgroundDrawable(badgeDrawable);
             badgeView.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
 
