@@ -209,6 +209,9 @@ public class TabBar extends android.widget.LinearLayout implements
 
         float scaleFactor = Utils.getScaleFactor(themedContext);
         final int IMAGEHEIGHT = (int)(17 * scaleFactor);
+        final int BADGEHEIGHT = (int)(18 * scaleFactor);
+        final int PADDING_HORI = (int)(12 * scaleFactor);
+        final int PADDING_VERT = (int)(1 * scaleFactor);
         final int TEXTSIZE = 12;
         final int ICON_ONLY_MARGIN = 12;
 
@@ -262,7 +265,7 @@ public class TabBar extends android.widget.LinearLayout implements
             tv.setTypeface(null, Typeface.BOLD);
             tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXTSIZE);
             tv.setText(abb.label.toUpperCase());
-            tv.setPadding(15, 0, 15, 0);
+            tv.setPadding(PADDING_HORI, 0, PADDING_HORI, 0);
 
             if (overwriteTintColor) {
                 tv.setTextColor(tintColor);
@@ -284,9 +287,9 @@ public class TabBar extends android.widget.LinearLayout implements
             badgeContainer.setGravity(Gravity.RIGHT);
 
             ShapeDrawable badgeDrawable = new ShapeDrawable(new OvalShape());
-            badgeDrawable.setIntrinsicHeight( 45 );
-            badgeDrawable.setIntrinsicWidth( 45);
-            badgeDrawable.setBounds(new Rect(0, 0, 45, 45));
+            badgeDrawable.setIntrinsicHeight( BADGEHEIGHT );
+            badgeDrawable.setIntrinsicWidth( BADGEHEIGHT);
+            badgeDrawable.setBounds(new Rect(0, 0, BADGEHEIGHT, BADGEHEIGHT));
             if (overwriteTintColor) {
                 badgeDrawable.getPaint().setColor(tintColor);
             } else {
@@ -297,7 +300,7 @@ public class TabBar extends android.widget.LinearLayout implements
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            blp.setMargins(0, 5, 30, 0);
+            blp.setMargins(0, PADDING_VERT, PADDING_HORI, 0);
 
             TextView badgeView = new TextView(themedContext);
             badgeView.setLayoutParams(blp);
