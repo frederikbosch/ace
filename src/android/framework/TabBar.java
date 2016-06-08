@@ -210,9 +210,9 @@ public class TabBar extends android.widget.LinearLayout implements
         float scaleFactor = Utils.getScaleFactor(themedContext);
         final int IMAGEHEIGHT = (int)(17 * scaleFactor);
         final int BADGEHEIGHT = (int)(18 * scaleFactor);
-        final int PADDING_HORI = (int)(12 * scaleFactor);
+        final int PADDING_HORI = (int)(11 * scaleFactor);
         final int PADDING_VERT = (int)(1 * scaleFactor);
-        final int TEXTSIZE = 12;
+        final int TEXTSIZE = 11;
         final int ICON_ONLY_MARGIN = 12;
 
         LinearLayout ll = new LinearLayout(themedContext);
@@ -300,7 +300,7 @@ public class TabBar extends android.widget.LinearLayout implements
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            blp.setMargins(0, PADDING_VERT, PADDING_HORI, 0);
+            blp.setMargins(0, PADDING_VERT, PADDING_HORI * 2, 0);
 
             TextView badgeView = new TextView(themedContext);
             badgeView.setLayoutParams(blp);
