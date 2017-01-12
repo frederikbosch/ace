@@ -441,7 +441,7 @@
     </config-file>
     <!-- Add AceActivity to the manifest -->
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
-      <activity xmlns:android="http://schemas.android.com/apk/res/android" android:name="run.ace.AceActivity">
+      <activity xmlns:android="http://schemas.android.com/apk/res/android" android:name="run.ace.AceActivity" android:configChanges="orientation|screenSize">
       </activity>
     </config-file>
 
