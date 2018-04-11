@@ -450,10 +450,10 @@
     -->
 
     <!-- Copies the app's native code and resources -->
-    <hook type="before_compile" src="src/plugin_hooks/android_before_compile.js" />
+    <!--<hook type="before_compile" src="src/plugin_hooks/android_before_compile.js" />-->
     <!-- Also do it before run, as "cordova run android" doesn't invoke the
          before_compile hook even when it compiles! -->
-    <hook type="before_run" src="src/plugin_hooks/android_before_compile.js" />
+    <!--<hook type="before_run" src="src/plugin_hooks/android_before_compile.js" />-->
 
     <!-- Android-specific JavaScript: -->
     <js-module src="www/android/platform.js">
