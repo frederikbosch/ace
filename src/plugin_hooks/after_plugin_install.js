@@ -24,9 +24,6 @@ function copyInitialFiles () {
 
     try {
         // Place initial native folders
-        fsextra.ensureDirSync(path.join(projectFolder, "native/android/src"));
-        fsextra.ensureDirSync(path.join(projectFolder, "native/android/res"));
-        fsextra.ensureDirSync(path.join(projectFolder, "native/android/libs"));
         fsextra.ensureDirSync(path.join(projectFolder, "native/ios"));
         fsextra.ensureDirSync(path.join(projectFolder, "native/ios/resources"));
 
