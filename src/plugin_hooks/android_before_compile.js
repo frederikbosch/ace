@@ -6,8 +6,9 @@ var path = require('path');
 var fs = require('fs-extra');
 
 module.exports = function (context) {
+  console.log('TEST ACE');
   // Do not allow theme with no action bar
-  var dest = path.join(__dirname, '../../../../platforms/android/app/src/main/AndroidManifestt.xml');
+  var dest = path.join(__dirname, '../../../../platforms/android/app/src/main/AndroidManifest.xml');
   var manifest = fs.readFileSync(dest, 'utf8');
   manifest = manifest.replace('android:theme="@android:style/Theme.DeviceDefault.NoActionBar"', '');
   fs.writeFileSync(dest, manifest);
