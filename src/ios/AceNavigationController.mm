@@ -67,6 +67,10 @@
     }
 }
 
+- (int) getHeight {
+    return self.navigationBar.frame.size.height;
+}
+
 // Only works when navigation bar is shown. The view controller handles the other case.
 -(UIStatusBarStyle)preferredStatusBarStyle{
 /*TODO

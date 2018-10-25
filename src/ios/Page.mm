@@ -62,6 +62,12 @@
     }
 }
 
+- (int) getCommandBarHeight {
+    UINavigationController* nc = [Frame getNavigationController];
+    AceNavigationController* anc = (AceNavigationController *) nc;
+    return anc.getHeight();
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
 
