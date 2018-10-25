@@ -35,5 +35,6 @@ Page.prototype.getBarTintColor = function () { return this.get("Page.BarTintColo
 Page.prototype.setBarTintColor = function (brush) { this.set("Page.BarTintColor", brush); };
 
 Page.prototype.getCommandBarHeight = function (callback) { this.invoke("getCommandBarHeight", callback); };
+Page.prototype.getStatusBarHeight = function (callback) { this.invoke("getStatusBarHeight", callback); };
 
 module.exports = Page;

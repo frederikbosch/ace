@@ -31,6 +31,10 @@ UINavigationController* _navigationController;
     return _navigationController;
 }
 
++ (int)getStatusBarHeight {
+    return [UIApplication sharedApplication].statusBarFrame.size.height;
+}
+
 + (void)goForward:(UIView*)view {
     UINavigationController* navigationController = [Frame getNavigationController];
 

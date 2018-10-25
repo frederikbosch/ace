@@ -5,6 +5,7 @@
 @interface Frame : UIView
 
 + (UINavigationController*)getNavigationController;
++ (int)getStatusBarHeight;
 + (void)goForward:(UIView*)view;
 + (void)GoBack;
 + (void)ShowNavigationBar;

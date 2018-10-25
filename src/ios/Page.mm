@@ -68,6 +68,10 @@
     return [anc getHeight];
 }
 
+- (int) getStatusBarHeight {
+    return [Frame getStatusBarHeight];
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
 
