@@ -11,4 +11,6 @@ enum NavigationMode { NavigationModeNew, NavigationModeBack, NavigationModeForwa
     @property enum NavigationMode NavigationMode;
     @property bool InsideNativeInitiatedBackNavigation;
 
+    - (int) getHeight;
+
 @end
