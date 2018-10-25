@@ -150,4 +150,8 @@
     }
 }
 
+- (int) getHeight {
+    return _tabBar.frame.size.height;
+}
+
 @end

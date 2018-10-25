@@ -20,5 +20,6 @@ TabBar.prototype.setTintColor = function (brush) { this.set("TabBar.TintColor", 
 
 TabBar.prototype.getBarTintColor = function () { return this.get("TabBar.BarTintColor"); };
 TabBar.prototype.setBarTintColor = function (brush) { this.set("TabBar.BarTintColor", brush); };
+TabBar.prototype.getHeight = function (callback) { this.invoke("TabBar", "getHeight", callback); };
 
 module.exports = TabBar;
