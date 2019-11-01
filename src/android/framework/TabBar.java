@@ -77,14 +77,14 @@ public class TabBar extends android.widget.LinearLayout implements
         //}
     }
 
-    public void setHomeButton(Image homeButton, android.app.Activity activity) {
+    public void setHomeButton(AppBarButton homeButton, android.app.Activity activity) {
         ActionBar mainActionBar = activity.getActionBar();
         if (mainActionBar == null) {
             throw new RuntimeException(
                 "Cannot set title on the main page in Android unless you set <preference name=\"ShowTitle\" value=\"true\"/> in config.xml.");
         }
 
-        Bitmap bitmap = Utils.getBitmapAsset(mainActionBar.getThemedContext(), homeButton.getSource());
+        Bitmap bitmap = Utils.getBitmapAsset(mainActionBar.getThemedContext(), homeButton.icon.toString());
         BitmapDrawable homeDrawable = new BitmapDrawable(bitmap);
 
         if (overwriteTintColor) {

@@ -16,7 +16,7 @@ public class Page extends AbsoluteLayout implements IHaveProperties {
     public TabBar tabBar;
     public CommandBar menuBar;
     public String frameTitle;
-    public Image homeButton;
+    public AppBarButton homeButton;
 
 	public Page(android.content.Context context) {
 		super(context);
@@ -61,7 +61,7 @@ public class Page extends AbsoluteLayout implements IHaveProperties {
             }
         }
         else if (propertyName.endsWith(".HomeButton")) {
-            homeButton = (Image)propertyValue;
+            homeButton = (AppBarButton)propertyValue;
             // If this is the currently-visible page, update the title now:
             // TODO: This only handles the main activity
             if (this.getParent() == NativeHost.getRootView()) {
@@ -93,6 +93,8 @@ public class Page extends AbsoluteLayout implements IHaveProperties {
 
     public void processBars(android.app.Activity activity, android.view.Menu menu) {
         updateTitle(activity);
+        updateHomeButton(activity);
+
         if (this.tabBar != null) {
             this.tabBar.show(activity);
         }
