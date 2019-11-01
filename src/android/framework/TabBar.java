@@ -20,6 +20,7 @@ import android.graphics.PorterDuff.Mode;
 //import android.support.v7.app.ActionBar;
 //import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -50,6 +51,7 @@ public class TabBar extends android.widget.LinearLayout implements
     boolean overwriteBarTintColor;
     boolean overwriteTintColor;
     TextView titleView;
+    AppBarButton homeButton;
 
 	public TabBar(Context context) {
 		super(context);
@@ -77,25 +79,8 @@ public class TabBar extends android.widget.LinearLayout implements
         //}
     }
 
-    public void setHomeButton(AppBarButton homeButton, android.app.Activity activity) {
-        ActionBar mainActionBar = activity.getActionBar();
-        if (mainActionBar == null) {
-            throw new RuntimeException(
-                "Cannot set title on the main page in Android unless you set <preference name=\"ShowTitle\" value=\"true\"/> in config.xml.");
-        }
-
-        Bitmap bitmap = Utils.getBitmapAsset(mainActionBar.getThemedContext(), homeButton.icon.toString());
-        BitmapDrawable homeDrawable = new BitmapDrawable(bitmap);
-
-        if (overwriteTintColor) {
-            homeDrawable.setColorFilter(tintColor, Mode.SRC_ATOP);
-        } else {
-            homeDrawable.setColorFilter(Color.WHITE, Mode.SRC_ATOP);
-        }
-
-        mainActionBar.setDisplayShowHomeEnabled(true);
-        mainActionBar.setHomeButtonEnabled(true);
-        mainActionBar.setIcon(homeDrawable);
+    public void setHomeButton(AppBarButton hb, android.app.Activity activity) {
+        homeButton = hb;
     }
 
     public void show(android.app.Activity activity) {
@@ -105,14 +90,69 @@ public class TabBar extends android.widget.LinearLayout implements
                 mainActionBar.show();
                 mainActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
                 mainActionBar.removeAllTabs();
+                mainActionBar.setDisplayShowTitleEnabled(false);
 
                 ActionBar.LayoutParams p = new ActionBar.LayoutParams(
-                    ViewGroup.LayoutParams.FILL_PARENT,
-                    ViewGroup.LayoutParams.FILL_PARENT
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    ActionBar.LayoutParams.WRAP_CONTENT
                 );
+                p.gravity = Gravity.LEFT;
 
                 LinearLayout ll = new LinearLayout(mainActionBar.getThemedContext());
                 ll.setLayoutParams(p);
+                ll.setOnTouchListener(new View.OnTouchListener()
+                  {
+                      @Override
+                      public boolean onTouch(View v, MotionEvent event) {
+                          // TODO Auto-generated method stub
+                          switch(event.getAction()) {
+                              case MotionEvent.ACTION_DOWN:
+                                ll.setBackgroundColor(manipulateColor(barTintColor, 0.8f));
+                                break;
+                              case MotionEvent.ACTION_UP:
+                                ll.setBackgroundColor(barTintColor);
+                                OutgoingMessages.raiseEvent("click", homeButton, null);
+                                break;
+                          }
+
+                          return true;
+                      }
+                  });
+
+                if (homeButton != null) {
+                    Bitmap bitmap = Utils.getBitmapAsset(mainActionBar.getThemedContext(), homeButton.icon.toString());
+                    BitmapDrawable homeDrawable = new BitmapDrawable(bitmap);
+
+                    if (overwriteTintColor) {
+                        homeDrawable.setColorFilter(tintColor, Mode.SRC_ATOP);
+                    } else {
+                        homeDrawable.setColorFilter(Color.WHITE, Mode.SRC_ATOP);
+                    }
+
+                    ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(
+                          ViewGroup.LayoutParams.FILL_PARENT,
+                          ViewGroup.LayoutParams.FILL_PARENT
+                    );
+
+                    ImageView imageView = new ImageView(mainActionBar.getThemedContext());
+                    imageView.setImageDrawable(homeDrawable);
+                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    imageView.setLayoutParams(layoutParams);
+
+                    float scaleFactor = Utils.getScaleFactor(mainActionBar.getThemedContext());
+                    final int IMAGEHEIGHT = (int)(25 * scaleFactor);
+
+                    LinearLayout.LayoutParams imageViewLayout = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        IMAGEHEIGHT
+                    );
+                    imageViewLayout.width = IMAGEHEIGHT;
+                    imageViewLayout.height = IMAGEHEIGHT;
+                    imageViewLayout.rightMargin = (int)(8 * scaleFactor);
+                    imageView.setLayoutParams(imageViewLayout);
+
+                    ll.addView(imageView);
+                }
 
                 TextView tv = new TextView(mainActionBar.getThemedContext());
                 LinearLayout.LayoutParams tvp = new LinearLayout.LayoutParams(
@@ -123,7 +163,7 @@ public class TabBar extends android.widget.LinearLayout implements
                 tv.setTypeface(null, Typeface.BOLD);
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                 tv.setText(mainActionBar.getTitle());
-                tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+                tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
                 if (overwriteTintColor) {
                     tv.setTextColor(tintColor);
                 } else {
@@ -131,9 +171,8 @@ public class TabBar extends android.widget.LinearLayout implements
                 }
                 tv.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
                 ll.setOrientation(LinearLayout.HORIZONTAL);
-                ll.addView(tv);
-
                 titleView = tv;
+                ll.addView(tv);
 
                 mainActionBar.setCustomView(ll);
                 mainActionBar.setDisplayShowCustomEnabled(true);
@@ -199,7 +238,19 @@ public class TabBar extends android.widget.LinearLayout implements
         //    throw new RuntimeException(
         //        "Unable to get TabBar from the current activity.");
         //}
-	}
+	  }
+
+    public static int manipulateColor(int color, float factor) {
+        int a = Color.alpha(color);
+        int r = Math.round(Color.red(color) * factor);
+        int g = Math.round(Color.green(color) * factor);
+        int b = Math.round(Color.blue(color) * factor);
+        return Color.argb(a,
+                Math.min(r,255),
+                Math.min(g,255),
+                Math.min(b,255));
+    }
+
 
     public static void remove(android.app.Activity activity) {
         //if (!(activity instanceof ActionBarActivity)) {
@@ -391,19 +442,6 @@ public class TabBar extends android.widget.LinearLayout implements
         int index = tab.getPosition();
         OutgoingMessages.raiseEvent("click", _primaryCommands.get(index), null);
  	}
-
-/*
-	public void onTabSelected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
-        int index = tab.getPosition();
-        OutgoingMessages.raiseEvent("click", _primaryCommands.get(index), null);
- 	}
-	public void onTabUnselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
- 	}
-	public void onTabReselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
-        int index = tab.getPosition();
-        OutgoingMessages.raiseEvent("click", _primaryCommands.get(index), null);
- 	}
-*/
 
 	// IHaveProperties.setProperty
 	public void setProperty(String propertyName, Object propertyValue)

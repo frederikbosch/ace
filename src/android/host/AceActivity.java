@@ -65,12 +65,6 @@ public class AceActivity extends android.app.Activity {
         // you specify a parent activity in AndroidManifest.xml.
         int index = item.getItemId();
 
-        if (_content instanceof Page && index == android.R.id.home) {
-            Page p = (Page)_content;
-            OutgoingMessages.raiseEvent("click", p.homeButton, null);
-            return true;
-        }
-
         if (_content instanceof Page) {
             Page p = (Page)_content;
             if (p.menuBar != null) {
