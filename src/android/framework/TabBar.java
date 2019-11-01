@@ -9,12 +9,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.Rect;
+import android.graphics.PorterDuff.Mode;
 //import android.support.v7.app.ActionBar;
 //import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
@@ -73,6 +75,27 @@ public class TabBar extends android.widget.LinearLayout implements
         //        actionBar.setTitle(title);
         //    }
         //}
+    }
+
+    public void setHomeButton(Image homeButton, android.app.Activity activity) {
+        ActionBar mainActionBar = activity.getActionBar();
+        if (mainActionBar == null) {
+            throw new RuntimeException(
+                "Cannot set title on the main page in Android unless you set <preference name=\"ShowTitle\" value=\"true\"/> in config.xml.");
+        }
+
+        Bitmap bitmap = Utils.getBitmapAsset(mainActionBar.getThemedContext(), homeButton.getSource();
+        BitmapDrawable homeDrawable = new BitmapDrawable(bitmap);
+
+        if (overwriteTintColor) {
+            homeDrawable.setColorFilter(tintColor, Mode.SRC_ATOP);
+        } else {
+            homeDrawable.setColorFilter(Color.WHITE, Mode.SRC_ATOP);
+        }
+
+        mainActionBar.setDisplayShowHomeEnabled(true);
+        mainActionBar.setHomeButtonEnabled(true);
+        mainActionBar.setIcon(homeDrawable);
     }
 
     public void show(android.app.Activity activity) {
@@ -247,7 +270,7 @@ public class TabBar extends android.widget.LinearLayout implements
                 iv.setLayoutParams(p);
             }
             Bitmap bitmap = Utils.getBitmapAsset(themedContext, abb.icon.toString());
-            iv.setImageDrawable(new android.graphics.drawable.BitmapDrawable(bitmap));
+            iv.setImageDrawable(new BitmapDrawable(bitmap));
 
             if (overwriteTintColor) {
                 iv.setColorFilter(tintColor);
