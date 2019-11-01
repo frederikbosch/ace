@@ -27,6 +27,9 @@ Page.prototype.setCommandBar = function (commandBar) { this.set("Page.BottomAppB
 Page.prototype.getTitle = function () { return this.get("Frame.Title"); };
 Page.prototype.setTitle = function (title) { this.set("Frame.Title", title); };
 
+Page.prototype.getHomeButton = function () { return this.get("Page.HomeButton"); };
+Page.prototype.setHomeButton = function (button) { this.set("Page.HomeButton", button); };
+
 // Helpers for navigation bar colors
 Page.prototype.getTintColor = function () { return this.get("Page.TintColor"); };
 Page.prototype.setTintColor = function (brush) { this.set("Page.TintColor", brush); };

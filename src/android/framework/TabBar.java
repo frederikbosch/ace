@@ -84,7 +84,7 @@ public class TabBar extends android.widget.LinearLayout implements
                 "Cannot set title on the main page in Android unless you set <preference name=\"ShowTitle\" value=\"true\"/> in config.xml.");
         }
 
-        Bitmap bitmap = Utils.getBitmapAsset(mainActionBar.getThemedContext(), homeButton.getSource();
+        Bitmap bitmap = Utils.getBitmapAsset(mainActionBar.getThemedContext(), homeButton.getSource());
         BitmapDrawable homeDrawable = new BitmapDrawable(bitmap);
 
         if (overwriteTintColor) {
