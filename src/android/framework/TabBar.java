@@ -100,26 +100,26 @@ public class TabBar extends android.widget.LinearLayout implements
 
                 LinearLayout ll = new LinearLayout(mainActionBar.getThemedContext());
                 ll.setLayoutParams(p);
-                ll.setOnTouchListener(new View.OnTouchListener()
-                  {
-                      @Override
-                      public boolean onTouch(View v, MotionEvent event) {
-                          // TODO Auto-generated method stub
-                          switch(event.getAction()) {
-                              case MotionEvent.ACTION_DOWN:
-                                ll.setBackgroundColor(manipulateColor(barTintColor, 0.8f));
-                                break;
-                              case MotionEvent.ACTION_UP:
-                                ll.setBackgroundColor(barTintColor);
-                                OutgoingMessages.raiseEvent("click", homeButton, null);
-                                break;
-                          }
-
-                          return true;
-                      }
-                  });
 
                 if (homeButton != null) {
+                    ll.setOnTouchListener(new View.OnTouchListener()
+                          {
+                              @Override
+                              public boolean onTouch(View v, MotionEvent event) {
+                                  // TODO Auto-generated method stub
+                                  switch(event.getAction()) {
+                                      case MotionEvent.ACTION_DOWN:
+                                        ll.setBackgroundColor(manipulateColor(barTintColor, 0.8f));
+                                        break;
+                                      case MotionEvent.ACTION_UP:
+                                        ll.setBackgroundColor(barTintColor);
+                                        OutgoingMessages.raiseEvent("click", homeButton, null);
+                                        break;
+                                  }
+
+                                  return true;
+                              }
+                          });
                     Bitmap bitmap = Utils.getBitmapAsset(mainActionBar.getThemedContext(), homeButton.icon.toString());
                     BitmapDrawable homeDrawable = new BitmapDrawable(bitmap);
 
